@@ -21,10 +21,260 @@
 
 
 
+var $questionDisplay = $('#buttonDisplay');
 
-function QuizQuestion (question, answer, category){
+function QuizQuestion(question, answer, category) {
   this.Question = question;
   this.Answer = answer;
   this.Category = category;
 }
+
+// Questions created by scraping the LOTR Wikipedia page with Node.js and Cheerio
+
+var characterQuestions = [
+  {
+    "Question": "Who is bearer of the One Ring, given to him by Bilbo Baggins?",
+    "Answer": "Frodo Baggins",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is gardener and friend of the Bagginses?",
+    "Answer": "Samwise Gamgee",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is Frodo's cousin and friend?",
+    "Answer": "Meriadoc Brandybuck (Merry)",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is Frodo's cousin and friend?",
+    "Answer": "Peregrin Took (Pippin or Pip)",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is a wizard, leads the Fellowship until his fall in Moria, returns from death to lead the armies of the West against Sauron?",
+    "Answer": "Gandalf the Grey",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is a descendant of Isildur and rightful heir to the thrones of Arnor and Gondor?",
+    "Answer": "Aragorn",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is an Elf prince and son of King Thranduil of the Silvan Elves of Northern Mirkwood?",
+    "Answer": "Legolas Greenleaf",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is son of GlÃ³in, a dwarf?",
+    "Answer": "Gimli",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is the eldest son and heir of Denethor?",
+    "Answer": "Boromir",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is ruling Steward of Gondor and Lord of Minas Tirith?",
+    "Answer": "Denethor",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is the younger son of Denethor and brother of Boromir?",
+    "Answer": "Faramir",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is the Elf co-ruler of LothlÃ³rien, and grandmother of Arwen?",
+    "Answer": "Galadriel",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is the Elf co-ruler of LothlÃ³rien, husband of Galadriel, and grandfather of Arwen?",
+    "Answer": "Celeborn",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is the Half-elven Lord of Rivendell and father of Arwen?",
+    "Answer": "Elrond",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is daughter of Elrond, love interest of Aragorn?",
+    "Answer": "Arwen UndÃ³miel",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is Frodo's uncle?",
+    "Answer": "Bilbo Baggins",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is King of Rohan, ally of Gondor?",
+    "Answer": "ThÃ©oden",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is the 3rd Marshal of the Mark and ThÃ©oden's nephew. Later King of Rohan after ThÃ©oden's death?",
+    "Answer": "Ã‰omer",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is sister of Ã‰omer, who disguises herself as a male warrior named Dernhelm to fight beside ThÃ©oden?",
+    "Answer": "Ã‰owyn",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is oldest of the Ents?",
+    "Answer": "Treebeard",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is lives at the edge of the Old Forest near the barrow-downs, a mysterious character with great powers?",
+    "Answer": "Tom Bombadil",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is an elf who lives in Rivendell and saves Frodo from the Ringwraiths.?",
+    "Answer": "Glorfindel",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is the Dark Lord and titular Lord of the Rings, a fallen Maia, helped the Elves of Eregion forge the Rings of Power in the Second Age?",
+    "Answer": "Sauron",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is men enslaved by Sauron when they accepted his treacherous gifts of Rings of Power?",
+    "Answer": "The NazgÃ»l or Ringwraiths",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is the Lord of the NazgÃ»l, and Sauron's most powerful servant, who commands Sauron's army?",
+    "Answer": "The Witch-king of Angmar",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is a wizard who seeks the One Ring for himself... originally the chief of the order of wizards of which Gandalf is also a member corrupted by Sauron through the palantÃ­r?",
+    "Answer": "Saruman the White",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is a secret servant of Saruman and traitor to Rohan, who poisons ThÃ©oden's perceptions with well placed advice?",
+    "Answer": "GrÃ­ma Wormtongue",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is a river hobbit originally named SmÃ©agol and an obsessive previous owner of the One Ring, planning to steal it back?",
+    "Answer": "Gollum",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is a giant spider who dwells in the pass of Cirith Ungol above Minas Morgul?",
+    "Answer": "Shelob",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is a Balrog dwelling beneath the Mines of Moria?",
+    "Answer": "Durin's Bane",
+    "Category": "Character"
+  },
+  {
+    "Question": "Who is also known as the Lieutenant of Barad-dÃ»r. The chief emissary of Sauron, he confronts the Army of the West outside the Black Gate?",
+    "Answer": "Mouth of Sauron",
+    "Category": "Character"
+  }
+];
+
+function takeQuiz() {
+  characterQuestions.sort(function (a, b) { return 0.5 - Math.random() });
+
+  console.log(characterQuestions);
+
+  var score = 0;
+
+  // for (var i = 0; i < characterQuestions.length; i++) {
+    var result = askQuestion(0);
+
+    // loadQuestion(result);
+  // }
+
+  // displayResult(score);
+
+}
+
+function askQuestion(questionNumber) {
+  var answersArray = [];
+  answersArray.push(questionNumber);
+
+  for (var i = 0; i < 4; i++) {
+    var flagVariable = true;
+
+    while (true) {
+      var randomAnswer = Math.floor((Math.random() * characterQuestions.length) + 1);
+      if (randomAnswer != questionNumber && answersArray.indexOf(randomAnswer) == -1) {
+        answersArray.push(randomAnswer);
+        break;
+      }
+    }
+  }
+
+  answersArray.sort(function (a, b) { return 0.5 - Math.random() });
+
+  console.log(answersArray);
+  for(var i = 0; i < 4; i++){
+    var $answerButton = $('<button type="button" class="btn btn-secondary btn-lg btn-block">');
+    if (answersArray[i] == questionNumber) {
+      $answerButton.addClass('correctAnswer');
+    }
+    else {
+      $answerButton.addClass('incorrectAnswer');
+    }
+
+    $answerButton.html(characterQuestions[answersArray[i]].Answer);
+
+    $questionDisplay.append($answerButton);
+  }
+  
+  var $currentQuestion = characterQuestions[questionNumber].Question;
+  $questionDisplay.append($)
+}
+
+function loadQuestion(result) {
+
+}
+
+$(document).ready(function () {
+  prepareQuiz();
+
+  $("body").on("click", ".buttonArea button.startGame", function () {
+
+  });
+
+  $("body").on("click", ".buttonArea button.correctAnswer", function () {
+
+  });
+
+  $("body").on("click", ".buttonArea button.incorrectAnswer", function () {
+
+  });
+});
+// takeQuiz();
+
+// Initial Screen
+// On Click button to start quiz
+
+// For each quiz question
+// timer countdown for correct answer
+// answer correct or incorrect
+
+// After each question
+// Load GIF, either positive or negative
+// Initialize counter for the next question
+
+// After the end of the quiz
+// Display the score
 
