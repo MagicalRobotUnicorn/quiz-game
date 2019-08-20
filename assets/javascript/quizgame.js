@@ -226,7 +226,7 @@ function askQuestion(questionNumber) {
   var answersArray = [];
   answersArray.push(questionNumber);
 
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < 3; i++) {
 
     while (true) {
       var randomAnswer = Math.floor((Math.random() * characterQuestions.length));
@@ -291,8 +291,6 @@ function positiveResult() {
 
   $('#dynamicDisplay').append('<center><div id="resultHeading">Correct Answer!</div>');
 
-  score++;
-
   if (indexThroughQuestions < characterQuestions.length - 1) {
     setTimeout(function () { askQuestion(++indexThroughQuestions); }, 5000);
   }
@@ -319,6 +317,13 @@ function negativeResult(reason = "Incorrect Answer!") {
   }
 }
 
+function endQuiz() {
+  $buttonDisplay.html('');
+  $buttonDisplay.append('<div id="resultHeading">Congrats!!</div>');
+  $buttonDisplay.append('<div id="prepare">Your score is ' + score + ' out of a possible 31.')
+  positiveResult();
+}
+
 $(document).ready(function () {
   prepareQuiz();
 
@@ -331,6 +336,7 @@ $(document).ready(function () {
   });
 
   $("body").on("click", "button.btn.btn-secondary.btn-lg.btn-block.correctAnswer", function () {
+    score++;
     positiveResult();
   });
 });
