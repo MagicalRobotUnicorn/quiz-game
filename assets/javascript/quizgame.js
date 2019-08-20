@@ -254,7 +254,7 @@ function askQuestion(questionNumber) {
   $('#questionHeading').html($currentQuestion);
 
   // $questionDisplay.append($);
-  var $dynamicDisplay = $('<div>');
+  var $dynamicDisplay = $('<section><div class="circle-wrap"><div class="circle"><div class="mask full"><div class="fill"></div></div><div class="mask half"><div class="fill"></div></div><div class="inside-circle">15</div></div></div></section>');
   $dynamicDisplay.attr('id','dynamicDisplay');
 
   $buttonDisplay.append($dynamicDisplay);
@@ -263,7 +263,10 @@ function askQuestion(questionNumber) {
 
 function updateQuestionClock() {
   questionTime--;
-  $('#dynamicDisplay').html(questionTime);
+  // $('#dynamicDisplay').html(questionTime);
+  var percentage = (questionTime / 15) * 180;
+  $('.circle-wrap .circle .fill').css('transform', 'rotate(-' + percentage + 'deg)');
+  $('.inside-circle').text(questionTime);
 
   if (questionTime == 0) {
     clearInterval(intervalId);
@@ -276,6 +279,7 @@ function updateQuestionClock() {
 
 function positiveResult() {
   clearInterval(intervalId);
+  questionTime = 15;
   $('button.btn.btn-secondary.btn-lg.btn-block.incorrectAnswer').removeClass('incorrectAnswer');
   $('button.btn.btn-secondary.btn-lg.btn-block.correctAnswer').removeClass('correctAnswer');
 
@@ -295,6 +299,7 @@ function positiveResult() {
 
 function negativeResult(reason = "Incorrect Answer!") {
   clearInterval(intervalId);
+  questionTime = 15;
   $('button.btn.btn-secondary.btn-lg.btn-block.incorrectAnswer').removeClass('incorrectAnswer');
   $('button.btn.btn-secondary.btn-lg.btn-block.correctAnswer').removeClass('correctAnswer');
 

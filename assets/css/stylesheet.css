@@ -2,6 +2,10 @@ body {
   background: #333;
 }
 
+button {
+  font-family: 'Uncial Antiqua', cursive;
+}
+
 #logoImg {
   width: 100%;
   margin-top: 40px;
@@ -23,7 +27,7 @@ body {
 }
 
 
-#questionDisplay {
+#buttonDisplay {
   margin-top: 40px;
   margin-bottom: 40px;
   background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%), url('../images/whitenoise.png');
@@ -32,6 +36,11 @@ body {
   background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%), url('../images/whitenoise.png');
   background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%), url('../images/whitenoise.png');
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%), url('../images/whitenoise.png');
+
+  padding: 50px;
+  min-height: 300px;
+  border-radius: 20px;
+  
 }
 
 /* Quiz Answers */
@@ -60,5 +69,62 @@ body {
 .fireEffect {
   color: #fff;
   background-color: #333;
-  text-shadow: #fff 0 -1px 4px, #ff0 0 -2px 10px, #ff8000 0 -10px 20px, red 0 -18px 40px;0
+  text-shadow: #fff 0 -1px 4px, #ff0 0 -2px 10px, #ff8000 0 -10px 20px, red 0 -18px 40px;
+}
+
+
+/* Countdown Timer Style */
+.circle-wrap {
+  margin: 50px auto;
+  width: 150px;
+  height: 150px;
+  background: #e6e2e7;
+  border-radius: 50%;
+}
+
+.circle-wrap .circle .mask,
+.circle-wrap .circle .fill {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.circle-wrap .circle .mask {
+  clip: rect(0px, 150px, 150px, 75px);
+}
+
+.circle-wrap .circle .mask .fill {
+  clip: rect(0px, 75px, 150px, 0px);
+  background-color: darkgreen;
+}
+
+.circle-wrap .circle .mask.full,
+.circle-wrap .circle .fill {
+  /* animation: fill ease-in-out 3s; */
+  transform: rotate(180deg);
+}
+
+@keyframes fill {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+.circle-wrap .inside-circle {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: #fff;
+  line-height: 130px;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 10px;
+  position: absolute;
+  z-index: 100;
+  font-weight: 700;
+  font-size: 2em;
 }
