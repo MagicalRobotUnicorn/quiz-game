@@ -17,11 +17,22 @@
 // Correct answers given index
 // Other answers randomized onload
 
-// Array Generated through scraping wikipedia with nodejs and cheerio 
 
 
+var $buttonDisplay = $('#buttonDisplay');
+var $questionDisplay = $('#questionHeading');
 
-var $questionDisplay = $('#buttonDisplay');
+var score = 0;
+var indexThroughQuestions = 0;
+
+var questionTime = 15;
+var loadingTime = 5;
+
+var questionInterval;
+var loadingInterval;
+
+var positiveMemes = ['zGnnFpOB1OjMQ', 'VEKefKJkKbhyU', 'zg92oefUzKfWU', 'AuSi9GagFjcys', 'YbTTq5SovQQIU', 'wPb0Er6MG6d9K', 'pVOvhisKbiMVi', 'ly3tQYHmXMsCI', 'I2TqO0oJBaNoc', 'AtzQ6pX6t2aaI'];
+var negativeMemes = ['1FR40e3b76Jnq', '47ukyqqk1nEFq', 'zpDJ6gBzsFFx6', 'qEFAJ8GZ0p33y', 'b1VRWNeZbrTos', 'VXoekWrwRUO7S', 'IWBHK9CLAkKPK', 'BF2hDMXteE8O4', 'EtxR8iU8jhw7C', 'nl8gOUtlmHGE0'];
 
 function QuizQuestion(question, answer, category) {
   this.Question = question;
@@ -189,29 +200,28 @@ var characterQuestions = [
   }
 ];
 
-function takeQuiz() {
+function prepareQuiz() {
   characterQuestions.sort(function (a, b) { return 0.5 - Math.random() });
 
-  console.log(characterQuestions);
+  var $defaultDisplay = $('<div>');
 
-  var score = 0;
+  var $introHeading = $('<h2>What lies ahead is the most difficult test all LOTR character Trivia</h2>');
+  var $introButton = $('<button type="button" class="btn btn-secondary btn-lg btn-block startGame">');
+  $introButton.text('Start Game');
 
-  // for (var i = 0; i < characterQuestions.length; i++) {
-    var result = askQuestion(0);
+  $defaultDisplay.append($introHeading);
+  $defaultDisplay.append($introButton);
 
-    // loadQuestion(result);
-  // }
-
-  // displayResult(score);
+  $buttonDisplay.html($defaultDisplay);
 
 }
 
 function askQuestion(questionNumber) {
+  $buttonDisplay.html('');
   var answersArray = [];
   answersArray.push(questionNumber);
 
   for (var i = 0; i < 4; i++) {
-    var flagVariable = true;
 
     while (true) {
       var randomAnswer = Math.floor((Math.random() * characterQuestions.length) + 1);
@@ -225,7 +235,7 @@ function askQuestion(questionNumber) {
   answersArray.sort(function (a, b) { return 0.5 - Math.random() });
 
   console.log(answersArray);
-  for(var i = 0; i < 4; i++){
+  for (var i = 0; i < 4; i++) {
     var $answerButton = $('<button type="button" class="btn btn-secondary btn-lg btn-block">');
     if (answersArray[i] == questionNumber) {
       $answerButton.addClass('correctAnswer');
@@ -236,30 +246,69 @@ function askQuestion(questionNumber) {
 
     $answerButton.html(characterQuestions[answersArray[i]].Answer);
 
-    $questionDisplay.append($answerButton);
+    $buttonDisplay.append($answerButton);
+
+    intervalId = setInterval(updateQuestionClock, 1000);
+
+    time++;
+    $('#display').html(timeConverter(time));
   }
-  
+
   var $currentQuestion = characterQuestions[questionNumber].Question;
   $questionDisplay.append($)
 }
 
-function loadQuestion(result) {
+function updateQuestionClock() {
+  time--
+  $('#timeDisplay').html(time);
 
+  if (time == 0) {
+    negativeResult();
+  }
+}
+
+
+
+function positiveResult() {
+  $('button.btn.btn-secondary.btn-lg.btn-block.incorrectAnswer').removeClass('incorrectAnswer');
+  $('button.btn.btn-secondary.btn-lg.btn-block.correctAnswer').removeClass('correctAnswer');
+  score++;
+
+  if (indexThroughQuestions < characterQuestions.length) {
+    setTimeout(function () { askQuestion(++indexThroughQuestions); }, 5000);
+  }
+  else {
+    endQuiz();
+  }
+  // load positive meme
+
+}
+
+function negativeResult() {
+  $('button.btn.btn-secondary.btn-lg.btn-block.incorrectAnswer').removeClass('incorrectAnswer');
+  $('button.btn.btn-secondary.btn-lg.btn-block.correctAnswer').removeClass('correctAnswer');
+
+  if (indexThroughQuestions < characterQuestions.length) {
+    setTimeout(function () { askQuestion(++indexThroughQuestions); }, 5000);
+  }
+  else {
+    endQuiz();
+  }
 }
 
 $(document).ready(function () {
   prepareQuiz();
 
-  $("body").on("click", ".buttonArea button.startGame", function () {
-
+  $("body").on("click", "button.btn.btn-secondary.btn-lg.btn-block.startGame", function () {
+    askQuestion(indexThroughQuestions);
   });
 
-  $("body").on("click", ".buttonArea button.correctAnswer", function () {
-
+  $("body").on("click", "button.btn.btn-secondary.btn-lg.btn-block.incorrectAnswer", function () {
+    negativeResult();
   });
 
-  $("body").on("click", ".buttonArea button.incorrectAnswer", function () {
-
+  $("body").on("click", "button.btn.btn-secondary.btn-lg.btn-block.correctAnswer", function () {
+    positiveResult();
   });
 });
 // takeQuiz();
