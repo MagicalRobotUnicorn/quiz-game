@@ -282,13 +282,14 @@ function updateQuestionClock() {
 
 
 function positiveResult() {
+  $('#dynamicDisplay').html('');
   callGiphy("positive");
   clearInterval(intervalId);
   questionTime = 15;
   $('button.btn.btn-secondary.btn-lg.btn-block.incorrectAnswer').removeClass('incorrectAnswer');
   $('button.btn.btn-secondary.btn-lg.btn-block.correctAnswer').removeClass('correctAnswer');
 
-  $('#dynamicDisplay').html("You got it right!");
+  $('#dynamicDisplay').append('<center><div id="resultHeading">Correct Answer!</div>');
 
   score++;
 
@@ -301,13 +302,14 @@ function positiveResult() {
 }
 
 function negativeResult(reason = "Incorrect Answer!") {
+  $('#dynamicDisplay').html('');
   callGiphy("negative");
   clearInterval(intervalId);
   questionTime = 15;
   $('button.btn.btn-secondary.btn-lg.btn-block.incorrectAnswer').removeClass('incorrectAnswer');
   $('button.btn.btn-secondary.btn-lg.btn-block.correctAnswer').removeClass('correctAnswer');
 
-  $('#dynamicDisplay').html(reason);
+  $('#dynamicDisplay').append('<center><div id="resultHeading">' + reason + '</div>');
 
   if (indexThroughQuestions < characterQuestions.length - 1) {
     setTimeout(function () { askQuestion(++indexThroughQuestions); }, 5000);
@@ -359,7 +361,8 @@ function callGiphy(result) {
     url: queryURL,
     method: "GET"
   }). then(function(response) {
-    $('#dynamicDisplay').append(('<img src ="' + response.data.images.original.url  + '">'));
+    $('#dynamicDisplay').append(('<div id="resultGifDiv"><img src="' + response.data.images.original.url  + '" id="resultGif"></div>'));
+    $('#dynamicDisplay').append('<div id="prepare">Prepare for the next question...</div>');
   });
 
 }
