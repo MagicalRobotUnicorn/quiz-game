@@ -217,6 +217,7 @@ function prepareQuiz() {
 }
 
 function askQuestion(questionNumber) {
+  $('#questionHeading').html('');
   $buttonDisplay.html('');
   var answersArray = [];
   answersArray.push(questionNumber);
@@ -224,7 +225,7 @@ function askQuestion(questionNumber) {
   for (var i = 0; i < 4; i++) {
 
     while (true) {
-      var randomAnswer = Math.floor((Math.random() * characterQuestions.length) + 1);
+      var randomAnswer = Math.floor((Math.random() * characterQuestions.length));
       if (randomAnswer != questionNumber && answersArray.indexOf(randomAnswer) == -1) {
         answersArray.push(randomAnswer);
         break;
@@ -246,40 +247,43 @@ function askQuestion(questionNumber) {
 
     $answerButton.html(characterQuestions[answersArray[i]].Answer);
 
-    var $clockDiv = $('<div id="countdownDisplay">');
-
     $buttonDisplay.append($answerButton);
-    $buttonDisplay.append($clockDiv);
-
   }
 
   var $currentQuestion = characterQuestions[questionNumber].Question;
   $('#questionHeading').html($currentQuestion);
 
-  $questionDisplay.append($);
+  // $questionDisplay.append($);
+  var $dynamicDisplay = $('<div>');
+  $dynamicDisplay.attr('id','dynamicDisplay');
+
+  $buttonDisplay.append($dynamicDisplay);
   intervalId = setInterval(updateQuestionClock, 1000);
 }
 
 function updateQuestionClock() {
   questionTime--;
-  console.log(questionTime);
-  // $('#countdownDisplay').html(questionTime);
+  $('#dynamicDisplay').html(questionTime);
 
   if (questionTime == 0) {
     clearInterval(intervalId);
     questionTime = 15;
-    negativeResult();
+    negativeResult("Ran out of time!");
   }
 }
 
 
 
 function positiveResult() {
+  clearInterval(intervalId);
   $('button.btn.btn-secondary.btn-lg.btn-block.incorrectAnswer').removeClass('incorrectAnswer');
   $('button.btn.btn-secondary.btn-lg.btn-block.correctAnswer').removeClass('correctAnswer');
+
+  $('#dynamicDisplay').html("You got it right!");
+
   score++;
 
-  if (indexThroughQuestions < characterQuestions.length) {
+  if (indexThroughQuestions < characterQuestions.length - 1) {
     setTimeout(function () { askQuestion(++indexThroughQuestions); }, 5000);
   }
   else {
@@ -289,11 +293,14 @@ function positiveResult() {
 
 }
 
-function negativeResult() {
+function negativeResult(reason = "Incorrect Answer!") {
+  clearInterval(intervalId);
   $('button.btn.btn-secondary.btn-lg.btn-block.incorrectAnswer').removeClass('incorrectAnswer');
   $('button.btn.btn-secondary.btn-lg.btn-block.correctAnswer').removeClass('correctAnswer');
 
-  if (indexThroughQuestions < characterQuestions.length) {
+  $('#dynamicDisplay').html(reason);
+
+  if (indexThroughQuestions < characterQuestions.length - 1) {
     setTimeout(function () { askQuestion(++indexThroughQuestions); }, 5000);
   }
   else {
@@ -316,19 +323,4 @@ $(document).ready(function () {
     positiveResult();
   });
 });
-// takeQuiz();
-
-// Initial Screen
-// On Click button to start quiz
-
-// For each quiz question
-// timer countdown for correct answer
-// answer correct or incorrect
-
-// After each question
-// Load GIF, either positive or negative
-// Initialize counter for the next question
-
-// After the end of the quiz
-// Display the score
 
