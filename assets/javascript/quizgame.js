@@ -187,6 +187,8 @@ var characterQuestions = [
 // Inital function
 // Prepares/Displays the initial landing page and randomizes the questions
 function prepareQuiz() {
+  console.log('LOTR Character Quiz!');
+  console.log('Greetings! Look here for quiz hints...');
   $('#questionHeading').text('One quiz to rule them all... one quiz to guide them...');
 
   characterQuestions.sort(function (a, b) { return 0.5 - Math.random() });
@@ -241,6 +243,7 @@ function askQuestion(questionNumber) {
   }
 
   var $currentQuestion = characterQuestions[questionNumber].Question;
+  console.log("pssst... the answer is: " + characterQuestions[questionNumber].Answer);
   $('#questionHeading').html($currentQuestion);
 
   var $dynamicDisplay = $('<section><div class="circle-wrap"><div class="circle"><div class="mask full"><div class="fill"></div></div><div class="mask half"><div class="fill"></div></div><div class="inside-circle">15</div></div></div></section>');
