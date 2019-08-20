@@ -18,22 +18,27 @@
 // Other answers randomized onload
 
 
-
+// jQuery selectors for two display divs
 var $buttonDisplay = $('#buttonDisplay');
 var $questionDisplay = $('#questionHeading');
 
+// Score and current question declared as globals
 var score = 0;
 var indexThroughQuestions = 0;
 
+// Vars for times declared as globals (15 seconds for question, 5 seconds between questions)
 var questionTime = 15;
 var loadingTime = 5;
 
+// Timing intervals declared as global variables
 var questionInterval;
 var loadingInterval;
 
+// GIF Id's on Giphy for both positive and negative reaction Gifs
 var positiveMemes = ['zGnnFpOB1OjMQ', 'VEKefKJkKbhyU', 'zg92oefUzKfWU', 'AuSi9GagFjcys', 'YbTTq5SovQQIU', 'wPb0Er6MG6d9K', 'pVOvhisKbiMVi', 'ly3tQYHmXMsCI', 'I2TqO0oJBaNoc', 'AtzQ6pX6t2aaI'];
 var negativeMemes = ['1FR40e3b76Jnq', '47ukyqqk1nEFq', 'zpDJ6gBzsFFx6', 'qEFAJ8GZ0p33y', 'b1VRWNeZbrTos', 'VXoekWrwRUO7S', 'IWBHK9CLAkKPK', 'BF2hDMXteE8O4', 'EtxR8iU8jhw7C', 'nl8gOUtlmHGE0'];
 
+// Object template for questions
 function QuizQuestion(question, answer, category) {
   this.Question = question;
   this.Answer = answer;
@@ -41,7 +46,6 @@ function QuizQuestion(question, answer, category) {
 }
 
 // Questions created by scraping the LOTR Wikipedia page with Node.js and Cheerio
-
 var characterQuestions = [
   {
     "Question": "Who is bearer of the One Ring, given to him by Bilbo Baggins?",
@@ -278,6 +282,7 @@ function updateQuestionClock() {
 
 
 function positiveResult() {
+  callGiphy("positive");
   clearInterval(intervalId);
   questionTime = 15;
   $('button.btn.btn-secondary.btn-lg.btn-block.incorrectAnswer').removeClass('incorrectAnswer');
@@ -293,11 +298,10 @@ function positiveResult() {
   else {
     endQuiz();
   }
-  // load positive meme
-
 }
 
 function negativeResult(reason = "Incorrect Answer!") {
+  callGiphy("negative");
   clearInterval(intervalId);
   questionTime = 15;
   $('button.btn.btn-secondary.btn-lg.btn-block.incorrectAnswer').removeClass('incorrectAnswer');
@@ -328,4 +332,37 @@ $(document).ready(function () {
     positiveResult();
   });
 });
+
+// TODO:
+// Countdown timer for next question
+// Style for the buttons and the timer font
+// Animation for question fade in
+
+// End Game Function
+
+function callGiphy(result) {
+  var image;
+  var index;
+
+  if (result == "positive") {
+    index = Math.floor(Math.random() * positiveMemes.length);
+    image = positiveMemes[index];
+  }
+  else {
+    index = Math.floor(Math.random() * negativeMemes.length);
+    image = negativeMemes[index];
+  }
+
+  var queryURL = 'https://api.giphy.com/v1/gifs/' + image + '?api_key=BtLHjwFVEd9ldzm3g7ETWmE8L67pdyzT';
+
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }). then(function(response) {
+    $('#dynamicDisplay').append(('<img src ="' + response.data.images.original.url  + '">'));
+  });
+
+}
+
+
 
