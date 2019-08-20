@@ -239,7 +239,6 @@ function askQuestion(questionNumber) {
 
   answersArray.sort(function (a, b) { return 0.5 - Math.random() });
 
-  console.log(answersArray);
   for (var i = 0; i < 4; i++) {
     var $answerButton = $('<button type="button" class="btn btn-secondary btn-lg btn-block">');
     if (answersArray[i] == questionNumber) {
@@ -295,7 +294,7 @@ function positiveResult() {
     setTimeout(function () { askQuestion(++indexThroughQuestions); }, 5000);
   }
   else {
-    endQuiz();
+    setTimeout(function() {endQuiz();}, 3000}
   }
 }
 
@@ -322,7 +321,14 @@ function endQuiz() {
   $questionDisplay.text('Congrats!');
   $buttonDisplay.append('<div id="resultHeading">Congrats!!</div>');
   $buttonDisplay.append('<div id="prepare">Your score is ' + score + ' out of a possible 31.')
-  $buttonDisplay.append('<img src="https://api.giphy.com/v1/gifs/' + positiveMemes[0] + '?api_key=BtLHjwFVEd9ldzm3g7ETWmE8L67pdyzT" id="resultGif">');
+  var queryURL = '<img src="https://api.giphy.com/v1/gifs/' + positiveMemes[0] + '?api_key=BtLHjwFVEd9ldzm3g7ETWmE8L67pdyzT" id="resultGif">';
+
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }). then(function(response) {
+    $buttonDisplay.append(('<div id="resultGifDiv"><img src="' + response.data.images.original.url  + '" id="resultGif"></div>'));
+  });
 }
 
 $(document).ready(function () {
@@ -361,7 +367,7 @@ function callGiphy(result) {
     index = Math.floor(Math.random() * negativeMemes.length);
     image = negativeMemes[index];
   }
-
+ 
   var queryURL = 'https://api.giphy.com/v1/gifs/' + image + '?api_key=BtLHjwFVEd9ldzm3g7ETWmE8L67pdyzT';
 
   $.ajax({
