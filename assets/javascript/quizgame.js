@@ -246,23 +246,28 @@ function askQuestion(questionNumber) {
 
     $answerButton.html(characterQuestions[answersArray[i]].Answer);
 
+    var $clockDiv = $('<div id="countdownDisplay">');
+
     $buttonDisplay.append($answerButton);
+    $buttonDisplay.append($clockDiv);
 
-    intervalId = setInterval(updateQuestionClock, 1000);
-
-    time++;
-    $('#display').html(timeConverter(time));
   }
 
   var $currentQuestion = characterQuestions[questionNumber].Question;
-  $questionDisplay.append($)
+  $('#questionHeading').html($currentQuestion);
+
+  $questionDisplay.append($);
+  intervalId = setInterval(updateQuestionClock, 1000);
 }
 
 function updateQuestionClock() {
-  time--
-  $('#timeDisplay').html(time);
+  questionTime--;
+  console.log(questionTime);
+  // $('#countdownDisplay').html(questionTime);
 
-  if (time == 0) {
+  if (questionTime == 0) {
+    clearInterval(intervalId);
+    questionTime = 15;
     negativeResult();
   }
 }
