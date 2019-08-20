@@ -294,7 +294,7 @@ function positiveResult() {
     setTimeout(function () { askQuestion(++indexThroughQuestions); }, 5000);
   }
   else {
-    setTimeout(function() {endQuiz();}, 3000}
+    setTimeout(function() {endQuiz();}, 3000);
   }
 }
 
