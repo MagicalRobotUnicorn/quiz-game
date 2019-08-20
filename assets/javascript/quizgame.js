@@ -1,23 +1,3 @@
-// quiz question object
-// quiz question contains:
-//  * GIPHY API Access Code: BtLHjwFVEd9ldzm3g7ETWmE8L67pdyzT
-//  * LOTR API Access Code: M3wx3CzB_JnO47DkAinm
-//    * https://the-one-api.herokuapp.com/v1
-//    * /book/5cf5805fb53e011a64671582
-//    * Authorization: Bearer your-api-key-123
-
-// other answers randomized?
-
-// Potter API
-// $2a$10$keI8PT9iiqnbBl/NUjDhZeDd9X1cVemSK.K5eOE7ZH0maFQH9dQ1K
-
-
-
-// All answers in an array
-// Correct answers given index
-// Other answers randomized onload
-
-
 // jQuery selectors for two display divs
 var $buttonDisplay = $('#buttonDisplay');
 var $questionDisplay = $('#questionHeading');
@@ -83,7 +63,7 @@ var characterQuestions = [
     "Category": "Character"
   },
   {
-    "Question": "Who is son of GlÃ³in, a dwarf?",
+    "Question": "Who is son of Glain, a dwarf?",
     "Answer": "Gimli",
     "Category": "Character"
   },
@@ -103,12 +83,12 @@ var characterQuestions = [
     "Category": "Character"
   },
   {
-    "Question": "Who is the Elf co-ruler of LothlÃ³rien, and grandmother of Arwen?",
+    "Question": "Who is the Elf co-ruler of Lothlarien, and grandmother of Arwen?",
     "Answer": "Galadriel",
     "Category": "Character"
   },
   {
-    "Question": "Who is the Elf co-ruler of LothlÃ³rien, husband of Galadriel, and grandfather of Arwen?",
+    "Question": "Who is the Elf co-ruler of Lothlarien, husband of Galadriel, and grandfather of Arwen?",
     "Answer": "Celeborn",
     "Category": "Character"
   },
@@ -119,7 +99,7 @@ var characterQuestions = [
   },
   {
     "Question": "Who is daughter of Elrond, love interest of Aragorn?",
-    "Answer": "Arwen UndÃ³miel",
+    "Answer": "Arwen Undamiel",
     "Category": "Character"
   },
   {
@@ -129,17 +109,17 @@ var characterQuestions = [
   },
   {
     "Question": "Who is King of Rohan, ally of Gondor?",
-    "Answer": "ThÃ©oden",
+    "Answer": "Thaoden",
     "Category": "Character"
   },
   {
-    "Question": "Who is the 3rd Marshal of the Mark and ThÃ©oden's nephew. Later King of Rohan after ThÃ©oden's death?",
-    "Answer": "Ã‰omer",
+    "Question": "Who is the 3rd Marshal of the Mark and Thaoden's nephew and later King of Rohan after Thaoden's death?",
+    "Answer": "Eomer",
     "Category": "Character"
   },
   {
-    "Question": "Who is sister of Ã‰omer, who disguises herself as a male warrior named Dernhelm to fight beside ThÃ©oden?",
-    "Answer": "Ã‰owyn",
+    "Question": "Who is sister of Eomer, who disguises herself as a male warrior named Dernhelm to fight beside Thaoden?",
+    "Answer": "Eowyn",
     "Category": "Character"
   },
   {
@@ -153,7 +133,7 @@ var characterQuestions = [
     "Category": "Character"
   },
   {
-    "Question": "Who is an elf who lives in Rivendell and saves Frodo from the Ringwraiths.?",
+    "Question": "Who is an elf who lives in Rivendell and saves Frodo from the Ringwraiths?",
     "Answer": "Glorfindel",
     "Category": "Character"
   },
@@ -164,26 +144,26 @@ var characterQuestions = [
   },
   {
     "Question": "Who is men enslaved by Sauron when they accepted his treacherous gifts of Rings of Power?",
-    "Answer": "The NazgÃ»l or Ringwraiths",
+    "Answer": "The Nazgul or Ringwraiths",
     "Category": "Character"
   },
   {
-    "Question": "Who is the Lord of the NazgÃ»l, and Sauron's most powerful servant, who commands Sauron's army?",
+    "Question": "Who is the Lord of the Nazgul, and Sauron's most powerful servant, who commands Sauron's army?",
     "Answer": "The Witch-king of Angmar",
     "Category": "Character"
   },
   {
-    "Question": "Who is a wizard who seeks the One Ring for himself... originally the chief of the order of wizards of which Gandalf is also a member corrupted by Sauron through the palantÃ­r?",
+    "Question": "Who is a wizard who seeks the One Ring for himself... originally the chief of the order of wizards of which Gandalf is also a member corrupted by Sauron through the palantir?",
     "Answer": "Saruman the White",
     "Category": "Character"
   },
   {
-    "Question": "Who is a secret servant of Saruman and traitor to Rohan, who poisons ThÃ©oden's perceptions with well placed advice?",
-    "Answer": "GrÃ­ma Wormtongue",
+    "Question": "Who is a secret servant of Saruman and traitor to Rohan, who poisons Thaoden's perceptions with well placed advice?",
+    "Answer": "Gra­ma Wormtongue",
     "Category": "Character"
   },
   {
-    "Question": "Who is a river hobbit originally named SmÃ©agol and an obsessive previous owner of the One Ring, planning to steal it back?",
+    "Question": "Who is a river hobbit originally named Smeagol and an obsessive previous owner of the One Ring, planning to steal it back?",
     "Answer": "Gollum",
     "Category": "Character"
   },
@@ -198,19 +178,24 @@ var characterQuestions = [
     "Category": "Character"
   },
   {
-    "Question": "Who is also known as the Lieutenant of Barad-dÃ»r. The chief emissary of Sauron, he confronts the Army of the West outside the Black Gate?",
+    "Question": "Who is also known as the Lieutenant of Barad-dar. The chief emissary of Sauron, he confronts the Army of the West outside the Black Gate?",
     "Answer": "Mouth of Sauron",
     "Category": "Character"
   }
 ];
 
+// Inital function
+// Prepares/Displays the initial landing page and randomizes the questions
 function prepareQuiz() {
+  $('#questionHeading').text('One quiz to rule them all... one quiz to guide them...');
+
   characterQuestions.sort(function (a, b) { return 0.5 - Math.random() });
 
-  var $defaultDisplay = $('<div>');
+  var $defaultDisplay = $('<div id="defaultDisplay"><center>');
 
-  var $introHeading = $('<h2>What lies ahead is the most difficult test all LOTR character Trivia</h2>');
-  var $introButton = $('<button type="button" class="btn btn-secondary btn-lg btn-block startGame">');
+  var $introHeading = $('<h2 class="initialText">What lies ahead is the most difficult test all LOTR character Trivia..</h2>');
+  $introHeading.append('<br /><center><h2 class="initialText">Good luck, player!</h2>')
+  var $introButton = $('<button type="button" class="btn btn-secondary btn-lg btn-block startGame" id="startButton">');
   $introButton.text('Start Game');
 
   $defaultDisplay.append($introHeading);
@@ -220,6 +205,8 @@ function prepareQuiz() {
 
 }
 
+// Main function of the game
+// Displays the question, selects random answers from the other characters in the game, assigns the correct and incorrect answer classes to the buttons, starts the countdown
 function askQuestion(questionNumber) {
   $('#questionHeading').html('');
   $buttonDisplay.html('');
@@ -256,7 +243,6 @@ function askQuestion(questionNumber) {
   var $currentQuestion = characterQuestions[questionNumber].Question;
   $('#questionHeading').html($currentQuestion);
 
-  // $questionDisplay.append($);
   var $dynamicDisplay = $('<section><div class="circle-wrap"><div class="circle"><div class="mask full"><div class="fill"></div></div><div class="mask half"><div class="fill"></div></div><div class="inside-circle">15</div></div></div></section>');
   $dynamicDisplay.attr('id','dynamicDisplay');
 
@@ -264,9 +250,9 @@ function askQuestion(questionNumber) {
   intervalId = setInterval(updateQuestionClock, 1000);
 }
 
+// Updates the clock interval, transforms the outer circle outline by the corresponding amount of degrees per second
 function updateQuestionClock() {
   questionTime--;
-  // $('#dynamicDisplay').html(questionTime);
   var percentage = (questionTime / 15) * 180;
   $('.circle-wrap .circle .fill').css('transform', 'rotate(-' + percentage + 'deg)');
   $('.inside-circle').text(questionTime);
@@ -279,7 +265,9 @@ function updateQuestionClock() {
 }
 
 
-
+// Function which is triggered on a correct answer
+// Deactivates the buttons, diplays the results, calls the Giphy API function, and sets the timeout for the next question
+// Checks victory condition
 function positiveResult() {
   $('#dynamicDisplay').html('');
   callGiphy("positive");
@@ -298,6 +286,9 @@ function positiveResult() {
   }
 }
 
+// Function which is triggered on an incorrect answer
+// Deactivates the buttons, diplays the results, calls the Giphy API function, and sets the timeout for the next question
+// Checks victory condition
 function negativeResult(reason = "Incorrect Answer!") {
   $('#dynamicDisplay').html('');
   callGiphy("negative");
@@ -312,10 +303,12 @@ function negativeResult(reason = "Incorrect Answer!") {
     setTimeout(function () { askQuestion(++indexThroughQuestions); }, 5000);
   }
   else {
-    endQuiz();
+    setTimeout(function() {endQuiz();}, 3000);
   }
 }
 
+// End of Game function
+// Displays Score and final GIF
 function endQuiz() {
   $buttonDisplay.html('');
   $questionDisplay.text('Congrats!');
@@ -331,30 +324,8 @@ function endQuiz() {
   });
 }
 
-$(document).ready(function () {
-  prepareQuiz();
-
-  $("body").on("click", "button.btn.btn-secondary.btn-lg.btn-block.startGame", function () {
-    askQuestion(indexThroughQuestions);
-  });
-
-  $("body").on("click", "button.btn.btn-secondary.btn-lg.btn-block.incorrectAnswer", function () {
-    negativeResult();
-  });
-
-  $("body").on("click", "button.btn.btn-secondary.btn-lg.btn-block.correctAnswer", function () {
-    score++;
-    positiveResult();
-  });
-});
-
-// TODO:
-// Countdown timer for next question
-// Style for the buttons and the timer font
-// Animation for question fade in
-
-// End Game Function
-
+// GIPHY Function Call
+// Uses random index from positive or negative array to display corresponding gif (result of ajax call to GIPHY API)
 function callGiphy(result) {
   var image;
   var index;
@@ -379,6 +350,24 @@ function callGiphy(result) {
   });
 
 }
+
+// Event handlers for on click, prepare quiz functions
+$(document).ready(function () {
+  prepareQuiz();
+
+  $("body").on("click", "button.btn.btn-secondary.btn-lg.btn-block.startGame", function () {
+    askQuestion(indexThroughQuestions);
+  });
+
+  $("body").on("click", "button.btn.btn-secondary.btn-lg.btn-block.incorrectAnswer", function () {
+    negativeResult();
+  });
+
+  $("body").on("click", "button.btn.btn-secondary.btn-lg.btn-block.correctAnswer", function () {
+    score++;
+    positiveResult();
+  });
+});
 
 
 

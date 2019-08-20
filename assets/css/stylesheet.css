@@ -5,7 +5,6 @@ body {
 button {
   font-family: 'Uncial Antiqua', cursive;
   color: white;
-  background: transparent;
 }
 
 #logoImg {
@@ -14,13 +13,31 @@ button {
   margin-bottom: 40px;
 }
 
-#thing1{
-  font-family: 'Cinzel', serif;
+#defaultDisplay {
+  margin-left: auto;
+  margin-right: auto;
+  align-content: center;
 }
+
+.initialText {
+  font-family: 'Caesar Dressing', cursive;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+#startButton {
+  margin-top: 60px;
+}
+
 
 /* This is 'one ring' heading text */
 #questionHeading{
   font-family: 'Tangerine', cursive;
+  font-size: 60px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 #questionDiv {
@@ -43,29 +60,6 @@ button {
   min-height: 300px;
   border-radius: 20px;
   
-}
-
-/* Quiz Answers */
-#thing3{
-  font-family: 'Playfair Display SC', serif;
-}
-#thing4{
-  font-family: 'UnifrakturMaguntia', cursive;
-}
-
-/* This is for countdown and success */
-#thing5{
-  font-family: 'Uncial Antiqua', cursive;
-}
-
-#thing6{
-  font-family: 'Astloch', cursive;
-}
-#thing7{
-  font-family: 'Caesar Dressing', cursive;
-}
-#thing8{
-  font-family: 'Sofadi One', cursive;
 }
 
 .fireEffect {
@@ -109,7 +103,8 @@ button {
   font-family: 'Uncial Antiqua', cursive;
 
 }
-/* Countdown Timer Style */
+
+/*All CSS Below Relates to Countdown Timer Style */
 .circle-wrap {
   margin: 50px auto;
   width: 150px;
@@ -137,7 +132,6 @@ button {
 
 .circle-wrap .circle .mask.full,
 .circle-wrap .circle .fill {
-  /* animation: fill ease-in-out 3s; */
   transform: rotate(180deg);
 }
 
