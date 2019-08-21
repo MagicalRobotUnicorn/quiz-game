@@ -195,7 +195,7 @@ function prepareQuiz() {
 
   var $defaultDisplay = $('<div id="defaultDisplay"><center>');
 
-  var $introHeading = $('<h2 class="initialText">What lies ahead is the most difficult test all LOTR character Trivia..</h2>');
+  var $introHeading = $('<h2 class="initialText">What lies ahead is the most difficult test in all of LOTR character Trivia...</h2>');
   $introHeading.append('<br /><center><h2 class="initialText">Good luck, player!</h2>')
   var $introButton = $('<button type="button" class="btn btn-secondary btn-lg btn-block startGame" id="startButton">');
   $introButton.text('Start Game');
