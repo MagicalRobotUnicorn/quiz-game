@@ -316,8 +316,8 @@ function endQuiz() {
   $buttonDisplay.html('');
   $questionDisplay.text('Congrats!');
   $buttonDisplay.append('<div id="resultHeading">Congrats!!</div>');
-  $buttonDisplay.append('<div id="prepare">Your score is ' + score + ' out of a possible 31.')
-  var queryURL = '<img src="https://api.giphy.com/v1/gifs/' + positiveMemes[0] + '?api_key=BtLHjwFVEd9ldzm3g7ETWmE8L67pdyzT" id="resultGif">';
+  $buttonDisplay.append('<div id="prepare">Your score is ' + score + ' out of a possible 31.</div>')
+  var queryURL = 'https://api.giphy.com/v1/gifs/' + positiveMemes[0] + '?api_key=BtLHjwFVEd9ldzm3g7ETWmE8L67pdyzT";
 
   $.ajax({
     url: queryURL,
