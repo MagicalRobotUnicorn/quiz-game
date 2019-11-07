@@ -1,14 +1,10 @@
- __         ______     ______   ______        ______   ______     __     __   __   __     ______        ______     ______     __    __     ______    
-/\ \       /\  __ \   /\__  _\ /\  == \      /\__  _\ /\  == \   /\ \   /\ \ / /  /\ \   /\  __ \      /\  ___\   /\  __ \   /\ "-./  \   /\  ___\   
-\ \ \____  \ \ \/\ \  \/_/\ \/ \ \  __<      \/_/\ \/ \ \  __<   \ \ \  \ \ \'/   \ \ \  \ \  __ \     \ \ \__ \  \ \  __ \  \ \ \-./\ \  \ \  __\   
- \ \_____\  \ \_____\    \ \_\  \ \_\ \_\       \ \_\  \ \_\ \_\  \ \_\  \ \__|    \ \_\  \ \_\ \_\     \ \_____\  \ \_\ \_\  \ \_\ \ \_\  \ \_____\ 
-  \/_____/   \/_____/     \/_/   \/_/ /_/        \/_/   \/_/ /_/   \/_/   \/_/      \/_/   \/_/\/_/      \/_____/   \/_/\/_/   \/_/  \/_/   \/_____/ 
+# Lord of the Rings Quiz Game
 
-  ******************************************************************************************************************************************************
+  **************************************************************************************************************************************
 
 This is a timer based quiz game for Assignment 5 of the University of Oregon Coding Bootcamp.
 
-Instructions:
+## Instructions:
 
 To begin, select the button to start the game.
 A series of 31 questions are presented.
@@ -17,19 +13,19 @@ For a hint, open the console.
 
 Upon completion of the game, the user's score is displayed.
 
-*********************************************************************************************************************************************************
+****************************************************************************************************************************************
 
-Coding Practices
+## Coding Practices
 
-*********************************************************************************************************************************************************
+****************************************************************************************************************************************
 
-Initial Set Up:
+### Initial Set Up:
 
 The questions were scraped from the LOTR Wikipedia page using Node Js and Cheerio, a library which allows for the use of jQuery commmands on a desktop enviornment.
 LOTR Wikipedia (Character Section): https://en.wikipedia.org/wiki/The_Lord_of_the_Rings
 Cheerio for Node Js: https://cheerio.js.org/
 
-Game Dynamics:
+### Game Dynamics:
 
 The game play consists of two timers, a 15 second timer to answer the question and a 5 second timer between questions.
 These are commented in the code.
